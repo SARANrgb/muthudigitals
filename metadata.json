@@ -1,0 +1,6 @@
+{
+  "name": "Muthu Digitals",
+  "description": "Premium wedding photography, studio portraits, and custom framing services since 1998, featuring a custom Package Finder and booking inquiry hub.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
