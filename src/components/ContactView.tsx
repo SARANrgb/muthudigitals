@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BookingInquiry } from '../types';
-import { Phone, Mail, MapPin, Clock, Calendar, CheckSquare, Send, CheckCircle2, ShieldCheck, FileText } from 'lucide-react';
+import { Phone, Mail, MapPin, ShieldCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import mapImage from '@/assets/google_map_location.png';
 
@@ -9,8 +8,6 @@ interface ContactViewProps {
 }
 
 export default function ContactView({ prefilledPackage }: ContactViewProps) {
-  // LocalStorage state for inquiries
-  const [inquiries, setInquiries] = useState<BookingInquiry[]>([]);
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -18,44 +15,6 @@ export default function ContactView({ prefilledPackage }: ContactViewProps) {
   const [serviceType, setServiceType] = useState('Wedding Package 1 - Essential');
   const [customMsg, setCustomMsg] = useState('');
   const [showStatusSuccess, setShowStatusSuccess] = useState(false);
-
-  // Load inquiries on mount
-  useEffect(() => {
-    const rawData = localStorage.getItem('muthu_digitals_inquiries');
-    if (rawData) {
-      try {
-        setInquiries(JSON.parse(rawData));
-      } catch (err) {
-        console.error("Could not parse saved inquiries, using blank defaults.", err);
-      }
-    } else {
-      // Seed some initial demo inquiries so that the user doesn't see an empty screen
-      const demoSeed: BookingInquiry[] = [
-        {
-          id: 'demo-1',
-          name: 'Arun Kumar',
-          email: 'arunkumar@gmail.com',
-          phone: '+91 98452 10452',
-          serviceType: 'Package 4 - Candid Pro',
-          message: 'Looking for both photography and 4K aerial drone coverage for our wedding reception on November 12th.',
-          date: '2026-11-12',
-          status: 'Confirmed'
-        },
-        {
-          id: 'demo-2',
-          name: 'Priya Meenakshi',
-          email: 'priya.mee@outlook.com',
-          phone: '+91 94432 99120',
-          serviceType: 'Package 2 - Enhanced',
-          message: 'Requesting frame restoring for three family photos and booking baby studio for portrait sessions.',
-          date: '2026-10-05',
-          status: 'Pending'
-        }
-      ];
-      setInquiries(demoSeed);
-      localStorage.setItem('muthu_digitals_inquiries', JSON.stringify(demoSeed));
-    }
-  }, []);
 
   // Update selected package if parent supplied a prefilled value (from package finder or packages grid)
   useEffect(() => {
@@ -65,57 +24,33 @@ export default function ContactView({ prefilledPackage }: ContactViewProps) {
     }
   }, [prefilledPackage]);
 
-  // Handle Form Submission
+  // Handle Form Submission - Opens WhatsApp chat box
   const handleSubmitInquiry = (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName || !phone) return;
 
-    const newInquiry: BookingInquiry = {
-      id: `inq-${Date.now()}`,
-      name: fullName,
-      email: email || 'no-email@provided.com',
-      phone: phone,
-      serviceType: serviceType,
-      message: customMsg || 'Looking forward to meeting at the studio!',
-      date: eventDate || new Date().toISOString().split('T')[0],
-      status: 'Pending'
-    };
+    const message = `Hi Muthu Digitals,
 
-    const updated = [...inquiries, newInquiry];
-    setInquiries(updated);
-    localStorage.setItem('muthu_digitals_inquiries', JSON.stringify(updated));
+I would like to inquire about booking/consultation details:
+• *Name:* ${fullName}
+• *Phone:* ${phone}
+${email ? `• *Email:* ${email}\n` : ''}• *Date:* ${eventDate || 'Not specified'}
+• *Package/Service:* ${serviceType}
+${customMsg ? `• *Custom Notes:* ${customMsg}` : ''}
 
-    // Reset Form fields
-    setFullName('');
-    setEmail('');
-    setPhone('');
-    setEventDate('');
-    setCustomMsg('');
+Please confirm the slot availability. Thank you!`;
+
+    const encodedText = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/919865091095?text=${encodedText}`;
+    
+    // Open WhatsApp in a new window/tab
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+
+    // Show temporary feedback message
     setShowStatusSuccess(true);
-
     setTimeout(() => {
       setShowStatusSuccess(false);
     }, 4000);
-  };
-
-  // Delete Inquiry
-  const handleDeleteInquiry = (id: string) => {
-    const updated = inquiries.filter((it) => it.id !== id);
-    setInquiries(updated);
-    localStorage.setItem('muthu_digitals_inquiries', JSON.stringify(updated));
-  };
-
-  // Simulate updating status of inquiry
-  const handleUpdateStatus = (id: string) => {
-    const updated = inquiries.map((it) => {
-      if (it.id === id) {
-        const nextStatus = it.status === 'Pending' ? 'Confirmed' : it.status === 'Confirmed' ? 'Completed' : 'Pending';
-        return { ...it, status: nextStatus as any };
-      }
-      return it;
-    });
-    setInquiries(updated);
-    localStorage.setItem('muthu_digitals_inquiries', JSON.stringify(updated));
   };
 
   return (
@@ -127,7 +62,7 @@ export default function ContactView({ prefilledPackage }: ContactViewProps) {
           Inquiry & Booking Hub
         </h2>
         <p className="font-sans text-sm sm:text-base text-gray-400 leading-relaxed">
-          Submit your dates below. Your details will be registered securely in our offline local database for our staff to verify packages and slot availability.
+          Select your details below. This dynamic message generator will pre-format your inquiry details and launch WhatsApp so you can contact us directly.
         </p>
       </section>
 
@@ -136,8 +71,10 @@ export default function ContactView({ prefilledPackage }: ContactViewProps) {
         {/* Booking Request Form */}
         <div className="lg:col-span-7 glass-card p-6 sm:p-8 rounded-3xl border border-gold-600/15 space-y-6">
           <div className="flex items-center gap-2 border-b border-gray-800 pb-4">
-            <Calendar className="w-5 h-5 text-gold-400" />
-            <h3 className="font-serif text-xl font-bold text-white">Book Your Event Consultation</h3>
+            <svg className="w-5 h-5 fill-current text-gold-400" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12.012 2c-5.506 0-9.988 4.482-9.988 9.988 0 1.76.458 3.48 1.33 5l-1.416 5.176 5.298-1.39a9.927 9.927 0 004.774 1.214h.004c5.506 0 9.988-4.482 9.988-9.988C22 6.482 17.518 2 12.012 2zm6.236 14.166c-.256.722-1.5 1.392-2.078 1.488-.578.096-1.302.192-3.806-.82-3.136-1.252-5.11-4.434-5.268-4.65-.158-.216-1.288-1.72-1.288-3.284 0-1.564.816-2.31 1.106-2.616.29-.306.634-.384.846-.384.212 0 .424.002.606.01.192.008.452-.074.708.544.256.62.88 2.144.954 2.296.074.152.124.328.024.528-.1.2-.15.328-.3.5-.15.172-.316.384-.452.514-.152.144-.312.3-.134.606.178.306.792 1.302 1.696 2.112.92.82 1.692 1.074 1.996 1.226.304.152.484.126.666-.084.182-.21.78-.908.99-1.218.21-.31.42-.26.708-.152.288.108 1.83.864 2.146 1.02.316.158.528.234.604.364.076.13.076.75-.18 1.472z"/>
+            </svg>
+            <h3 className="font-serif text-xl font-bold text-white">WhatsApp Message Builder</h3>
           </div>
 
           <AnimatePresence>
@@ -152,9 +89,9 @@ export default function ContactView({ prefilledPackage }: ContactViewProps) {
                   <ShieldCheck className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="font-sans text-xs font-bold text-emerald-400 uppercase">Registration Successful!</h4>
+                  <h4 className="font-sans text-xs font-bold text-emerald-400 uppercase">Message Constructed!</h4>
                   <p className="font-sans text-xs text-gray-300 mt-1">
-                    Your event details have been committed into the client data bank table below. You can update or delete them freely at any time.
+                    Opening WhatsApp to directly send your booking inquiry. If it does not redirect, please click the button below again.
                   </p>
                 </div>
               </motion.div>
@@ -252,8 +189,10 @@ export default function ContactView({ prefilledPackage }: ContactViewProps) {
               type="submit"
               className="w-full gold-gradient-bg text-black hover:opacity-90 font-sans text-xs font-bold uppercase tracking-widest py-4.5 rounded-xl cursor-pointer flex items-center justify-center gap-2"
             >
-              <Send className="w-4 h-4 text-black" />
-              Submit and Register SQLite Data locally
+              <svg className="w-4 h-4 fill-current text-black" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.012 2c-5.506 0-9.988 4.482-9.988 9.988 0 1.76.458 3.48 1.33 5l-1.416 5.176 5.298-1.39a9.927 9.927 0 004.774 1.214h.004c5.506 0 9.988-4.482 9.988-9.988C22 6.482 17.518 2 12.012 2zm6.236 14.166c-.256.722-1.5 1.392-2.078 1.488-.578.096-1.302.192-3.806-.82-3.136-1.252-5.11-4.434-5.268-4.65-.158-.216-1.288-1.72-1.288-3.284 0-1.564.816-2.31 1.106-2.616.29-.306.634-.384.846-.384.212 0 .424.002.606.01.192.008.452-.074.708.544.256.62.88 2.144.954 2.296.074.152.124.328.024.528-.1.2-.15.328-.3.5-.15.172-.316.384-.452.514-.152.144-.312.3-.134.606.178.306.792 1.302 1.696 2.112.92.82 1.692 1.074 1.996 1.226.304.152.484.126.666-.084.182-.21.78-.908.99-1.218.21-.31.42-.26.708-.152.288.108 1.83.864 2.146 1.02.316.158.528.234.604.364.076.13.076.75-.18 1.472z"/>
+              </svg>
+              Open & Send to WhatsApp
             </button>
           </form>
         </div>
