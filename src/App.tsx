@@ -38,7 +38,7 @@ export default function App() {
             <img
               src={logoImage}
               alt="Muthu Digitals Logo"
-              className="w-12 h-12 rounded-xl object-cover border border-gold-500/30 group-hover:scale-105 transition-transform duration-300"
+              className="w-12 h-12 rounded-full object-cover border border-gold-500/30 group-hover:scale-105 transition-transform duration-300"
             />
             <div>
               <h1 className="font-serif text-lg sm:text-xl font-bold tracking-wider text-white uppercase flex items-center gap-1.5 leading-none">
@@ -213,7 +213,7 @@ export default function App() {
               <img
                 src={logoImage}
                 alt="Muthu Digitals Logo"
-                className="w-10 h-10 rounded-lg object-cover border border-gold-500/20"
+                className="w-10 h-10 rounded-full object-cover border border-gold-500/20"
               />
               <div>
                 <h4 className="font-serif text-lg font-bold text-white uppercase tracking-wider">
