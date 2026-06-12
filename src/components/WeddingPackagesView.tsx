@@ -4,11 +4,10 @@ import { CheckCircle, Info, Sparkles, AlertCircle, ShoppingBag, Send } from 'luc
 import { motion, AnimatePresence } from 'motion/react';
 
 interface WeddingPackagesViewProps {
-  onSelectPackageForInquiry: (pkgName: string) => void;
   useTamil: boolean;
 }
 
-export default function WeddingPackagesView({ onSelectPackageForInquiry, useTamil }: WeddingPackagesViewProps) {
+export default function WeddingPackagesView({ useTamil }: WeddingPackagesViewProps) {
 
   return (
     <div id="wedding-packages-view" className="space-y-16 sm:space-y-24">
@@ -104,19 +103,11 @@ export default function WeddingPackagesView({ onSelectPackageForInquiry, useTami
                   href={`https://wa.me/919865091095?text=${encodeURIComponent(pkg.whatsappMessage)}`}
                   target="_blank" 
                   rel="noreferrer"
-                  className="w-full text-center block font-sans text-xs font-bold uppercase tracking-wider py-4 rounded-xl border border-gold-400/30 text-gold-400 hover:bg-gold-400/10 hover:border-gold-300 transition-all cursor-pointer"
+                  className="w-full text-center block font-sans text-xs font-bold uppercase tracking-wider py-4 bg-gold-400 text-black hover:bg-gold-500 rounded-xl transition-all active:scale-98 cursor-pointer flex items-center justify-center gap-2 shadow-lg hover:shadow-gold-500/10"
                 >
+                  <ShoppingBag className="w-4 h-4" />
                   {useTamil ? 'வாட்ஸ்அப் மூலம் உடனடியாக பதிவு செய்க' : 'Book Instant via WhatsApp'}
                 </a>
-
-                {/* Local Inquiry Booking redirect */}
-                <button 
-                  onClick={() => onSelectPackageForInquiry(pkg.name)}
-                  className="w-full flex items-center justify-center gap-2 font-sans text-xs font-bold tracking-widest uppercase py-4 rounded-xl bg-gold-400 text-black hover:bg-gold-300 transition-all active:scale-98 cursor-pointer"
-                >
-                  <Send className="w-3.5 h-3.5" />
-                  {useTamil ? 'முன்பதிவு விசாரணை கோரிக்கை' : 'Request Booking Inquiry'}
-                </button>
               </div>
             </div>
           );
@@ -135,12 +126,18 @@ export default function WeddingPackagesView({ onSelectPackageForInquiry, useTami
               : 'Tell us about your event duration, venue, and design details. We happily accommodate bespoke parameters.'}
           </p>
         </div>
-        <button 
-          onClick={() => onSelectPackageForInquiry('Custom Bespoke Request')}
-          className="gold-gradient-bg text-black hover:bg-gold-500 font-sans text-xs font-bold tracking-widest uppercase py-4 px-8 rounded-xl shrink-0 cursor-pointer"
+        <a 
+          href={`https://wa.me/919865091095?text=${encodeURIComponent(
+            useTamil
+              ? 'வணக்கம் முத்து டிஜிட்டல்ஸ், நான் ஒரு தனிப்பயன் தொகுப்பை (Bespoke Package) வடிவமைக்க விரும்புகிறேன். விவரங்களை விவாதிக்க விரும்புகிறேன்.'
+              : 'Hi Muthu Digitals, I would like to design a completely custom bespoke package for my event. Please connect with me.'
+          )}`}
+          target="_blank" 
+          rel="noreferrer"
+          className="gold-gradient-bg text-black hover:opacity-90 font-sans text-xs font-bold tracking-widest uppercase py-4 px-8 rounded-xl shrink-0 cursor-pointer text-center"
         >
           {useTamil ? 'எனது திட்டத்தை தனிப்பயனாக்கு' : 'Customize My Plan'}
-        </button>
+        </a>
       </section>
     </div>
   );

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { WEDDING_PACKAGES, WeddingPackage, ALBUM_PACKAGES, AlbumPackage, PREMIUM_FRAMES_PRICES, FramePrice } from '../types';
-import { Check, CheckCircle, ChevronRight, Sliders, Send, Camera, Layers, Image } from 'lucide-react';
+import { Check, CheckCircle, ChevronRight, Sliders, Send, Camera, Layers, Image, MessageSquare } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface ProductFinderViewProps {
-  onSelectPackageForInquiry: (pkgName: string) => void;
   useTamil: boolean;
 }
 
@@ -43,7 +42,7 @@ const FRAME_FEATURES_TA = [
   'தலைமுறைகள் கடந்து நிலைத்து நிற்கும் தரம்'
 ];
 
-export default function ProductFinderView({ onSelectPackageForInquiry, useTamil }: ProductFinderViewProps) {
+export default function ProductFinderView({ useTamil }: ProductFinderViewProps) {
   const [productCategory, setProductCategory] = useState<'PACKAGES' | 'ALBUMS' | 'FRAMES'>('PACKAGES');
   
   // Category-specific filters
@@ -417,20 +416,22 @@ export default function ProductFinderView({ onSelectPackageForInquiry, useTamil 
 
                           {/* Redirect actions */}
                           <div className="pt-4">
-                            <button
-                              onClick={() => onSelectPackageForInquiry(`${rec.name} (Matched Finder)`)}
-                              className="w-full font-sans text-xs font-bold uppercase tracking-widest py-3 bg-gold-400 text-black hover:bg-gold-500 rounded-lg transition-all active:scale-98 inline-flex items-center justify-center gap-1.5 cursor-pointer"
+                            <a 
+                              href={`https://wa.me/919865091095?text=${encodeURIComponent(whatsappMatchMsg)}`}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="w-full text-center font-sans text-xs font-bold uppercase tracking-widest py-3.5 bg-gold-400 text-black hover:bg-gold-500 rounded-lg transition-all active:scale-98 inline-flex items-center justify-center gap-1.5 cursor-pointer shadow-lg hover:shadow-gold-500/10 text-center block"
                             >
-                              <Send className="w-3.5 h-3.5" />
-                              {useTamil ? 'விசாரணையை அனுப்பவும்' : 'Send Inquiry Now'}
-                            </button>
+                              <MessageSquare className="w-4 h-4" />
+                              {useTamil ? 'வாட்ஸ்அப் மூலம் கேட்கவும்' : 'Inquire via WhatsApp'}
+                            </a>
                           </div>
                         </div>
                       </motion.div>
                     );
                   })
                 ) : (
-                  <NoProductFound categoryName={useTamil ? 'தொகுப்புகள்' : 'packages'} sliderVal={activeSliderVal} useTamil={useTamil} onInquiry={onSelectPackageForInquiry} />
+                  <NoProductFound categoryName={useTamil ? 'தொகுப்புகள்' : 'packages'} sliderVal={activeSliderVal} useTamil={useTamil} />
                 )}
               </motion.div>
             )}
@@ -509,20 +510,22 @@ export default function ProductFinderView({ onSelectPackageForInquiry, useTamil 
 
                           {/* Redirect actions */}
                           <div className="pt-4">
-                            <button
-                              onClick={() => onSelectPackageForInquiry(`${rec.name} (${formatName} Album) (Matched Finder)`)}
-                              className="w-full font-sans text-xs font-bold uppercase tracking-widest py-3 bg-gold-400 text-black hover:bg-gold-500 rounded-lg transition-all active:scale-98 inline-flex items-center justify-center gap-1.5 cursor-pointer"
+                            <a 
+                              href={`https://wa.me/919865091095?text=${encodeURIComponent(whatsappMatchMsg)}`}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="w-full text-center font-sans text-xs font-bold uppercase tracking-widest py-3.5 bg-gold-400 text-black hover:bg-gold-500 rounded-lg transition-all active:scale-98 inline-flex items-center justify-center gap-1.5 cursor-pointer shadow-lg hover:shadow-gold-500/10 text-center block"
                             >
-                              <Send className="w-3.5 h-3.5" />
-                              {useTamil ? 'விசாரணையை அனுப்பவும்' : 'Send Inquiry Now'}
-                            </button>
+                              <MessageSquare className="w-4 h-4" />
+                              {useTamil ? 'வாட்ஸ்அப் மூலம் கேட்கவும்' : 'Inquire via WhatsApp'}
+                            </a>
                           </div>
                         </div>
                       </motion.div>
                     );
                   })
                 ) : (
-                  <NoProductFound categoryName={useTamil ? 'ஆல்பங்கள்' : 'albums'} sliderVal={activeSliderVal} useTamil={useTamil} onInquiry={onSelectPackageForInquiry} />
+                  <NoProductFound categoryName={useTamil ? 'ஆல்பங்கள்' : 'albums'} sliderVal={activeSliderVal} useTamil={useTamil} />
                 )}
               </motion.div>
             )}
@@ -589,20 +592,22 @@ export default function ProductFinderView({ onSelectPackageForInquiry, useTamil 
 
                           {/* Redirect actions */}
                           <div className="pt-4">
-                            <button
-                              onClick={() => onSelectPackageForInquiry(`${rec.size} (Matched Finder)`)}
-                              className="w-full font-sans text-xs font-bold uppercase tracking-widest py-3 bg-gold-400 text-black hover:bg-gold-500 rounded-lg transition-all active:scale-98 inline-flex items-center justify-center gap-1.5 cursor-pointer"
+                            <a 
+                              href={`https://wa.me/919865091095?text=${encodeURIComponent(whatsappMatchMsg)}`}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="w-full text-center font-sans text-xs font-bold uppercase tracking-widest py-3.5 bg-gold-400 text-black hover:bg-gold-500 rounded-lg transition-all active:scale-98 inline-flex items-center justify-center gap-1.5 cursor-pointer shadow-lg hover:shadow-gold-500/10 text-center block"
                             >
-                              <Send className="w-3.5 h-3.5" />
-                              {useTamil ? 'விசாரணையை அனுப்பவும்' : 'Send Inquiry Now'}
-                            </button>
+                              <MessageSquare className="w-4 h-4" />
+                              {useTamil ? 'வாட்ஸ்அப் மூலம் கேட்கவும்' : 'Inquire via WhatsApp'}
+                            </a>
                           </div>
                         </div>
                       </motion.div>
                     );
                   })
                 ) : (
-                  <NoProductFound categoryName={useTamil ? 'பிரேம்கள்' : 'frames'} sliderVal={activeSliderVal} useTamil={useTamil} onInquiry={onSelectPackageForInquiry} />
+                  <NoProductFound categoryName={useTamil ? 'பிரேம்கள்' : 'frames'} sliderVal={activeSliderVal} useTamil={useTamil} />
                 )}
               </motion.div>
             )}
@@ -618,10 +623,13 @@ interface NoProductFoundProps {
   categoryName: string;
   sliderVal: number;
   useTamil: boolean;
-  onInquiry: (name: string) => void;
 }
 
-function NoProductFound({ categoryName, sliderVal, useTamil, onInquiry }: NoProductFoundProps) {
+function NoProductFound({ categoryName, sliderVal, useTamil }: NoProductFoundProps) {
+  const whatsappBespokeMsg = useTamil
+    ? `வணக்கம் முத்து டிஜிட்டல்ஸ், நான் உங்கள் தயாரிப்பு கண்டறிவி பக்கத்தைப் பார்த்தேன். எனது பட்ஜெட்டிற்குள் (${sliderVal.toLocaleString('en-IN')}) ஒரு தனிப்பயன் ${categoryName} வடிவமைக்க விரும்புகிறேன்.`
+    : `Hi Muthu Digitals, I was checking your Product Finder and would like a custom quote request for ${categoryName} under budget ₹${sliderVal.toLocaleString('en-IN')}.`;
+
   return (
     <div className="text-center py-16 space-y-4 glass-card rounded-2xl border border-gray-800">
       <span className="text-4xl">🔍</span>
@@ -635,12 +643,15 @@ function NoProductFound({ categoryName, sliderVal, useTamil, onInquiry }: NoProd
           ? 'பட்ஜெட் வரம்பை சற்று அதிகரிக்கவும் அல்லது எங்கள் வடிவமைப்பாளர்களிடமிருந்து தனிப்பயன் மதிப்பீட்டை கோரவும்.'
           : 'Try raising your budget limit slider slightly or click below to submit a custom quote request.'}
       </p>
-      <button 
-        onClick={() => onInquiry(`Bespoke ${categoryName} Quote Request (Finder)`)}
-        className="gold-gradient-bg text-black py-3 px-6 rounded-lg font-sans text-xs font-bold uppercase tracking-wider cursor-pointer mt-4"
+      <a 
+        href={`https://wa.me/919865091095?text=${encodeURIComponent(whatsappBespokeMsg)}`}
+        target="_blank"
+        rel="noreferrer"
+        className="gold-gradient-bg text-black py-3.5 px-6 rounded-lg font-sans text-xs font-bold uppercase tracking-wider cursor-pointer mt-4 inline-flex items-center gap-1.5 hover:opacity-90"
       >
+        <MessageSquare className="w-4 h-4" />
         {useTamil ? 'தனிப்பயன் மதிப்பீட்டு கோரிக்கை' : 'Send Bespoke Quote Request'}
-      </button>
+      </a>
     </div>
   );
 }

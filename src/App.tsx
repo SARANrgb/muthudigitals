@@ -10,23 +10,15 @@ import logoImage from '@/assets/logo.png';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('home');
-  const [prefilledPackage, setPrefilledPackage] = useState<string>('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const [useTamil, setUseTamil] = useState<boolean>(false);
-
-  // Helper to prefill and redirect to contact inquiry form
-  const handleSelectPackageForInquiry = (pkgName: string) => {
-    setPrefilledPackage(pkgName);
-    setActiveTab('contact');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   const navItems = [
     { id: 'home', label: 'Home', labelTamil: 'முகப்பு' },
     { id: 'services', label: 'Services', labelTamil: 'சேவைகள்' },
     { id: 'packages', label: 'Wedding Packages', labelTamil: 'திருமண திட்டங்கள்' },
     { id: 'package-finder', label: 'Product Finder', labelTamil: 'தயாரிப்பு கண்டறிவி' },
-    { id: 'contact', label: 'Inquiry Hub', labelTamil: 'தொடர்பு மையம்' },
+    { id: 'contact', label: 'Contact Us', labelTamil: 'தொடர்பு கொள்ள' },
   ];
 
   return (
@@ -67,8 +59,6 @@ export default function App() {
                   key={item.id}
                   onClick={() => {
                     setActiveTab(item.id);
-                    // Clear the package prefill if they navigate explicitly to contact
-                    if (item.id !== 'contact') setPrefilledPackage('');
                   }}
                   className={`px-4 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all relative flex flex-col items-center cursor-pointer ${isActive ? 'text-gold-400' : 'text-gray-400 hover:text-white'}`}
                 >
@@ -128,7 +118,6 @@ export default function App() {
                     onClick={() => {
                       setActiveTab(item.id);
                       setIsMobileMenuOpen(false);
-                      if (item.id !== 'contact') setPrefilledPackage('');
                     }}
                     className={`w-full text-left py-3 px-4 rounded-xl flex justify-between items-center transition-all ${isActive ? 'bg-gold-400/10 border border-gold-400/30 text-gold-400' : 'text-gray-400 hover:text-white border border-transparent'}`}
                   >
@@ -190,7 +179,6 @@ export default function App() {
             {activeTab === 'home' && (
               <HomeView
                 setActiveTab={setActiveTab}
-                setMatchedPackageId={setPrefilledPackage}
                 useTamil={useTamil}
                 setUseTamil={setUseTamil}
               />
@@ -200,19 +188,17 @@ export default function App() {
             )}
             {activeTab === 'packages' && (
               <WeddingPackagesView
-                onSelectPackageForInquiry={handleSelectPackageForInquiry}
                 useTamil={useTamil}
               />
             )}
             {activeTab === 'package-finder' && (
               <ProductFinderView
-                onSelectPackageForInquiry={handleSelectPackageForInquiry}
                 useTamil={useTamil}
               />
             )}
 
             {activeTab === 'contact' && (
-              <ContactView prefilledPackage={prefilledPackage} useTamil={useTamil} />
+              <ContactView useTamil={useTamil} />
             )}
           </motion.div>
         </AnimatePresence>
