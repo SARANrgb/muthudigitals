@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import HomeView from './components/HomeView';
 import ServicesView from './components/ServicesView';
 import WeddingPackagesView from './components/WeddingPackagesView';
-import PackageFinderView from './components/PackageFinderView';
+import ProductFinderView from './components/ProductFinderView';
 import ContactView from './components/ContactView';
 import logoImage from '@/assets/logo.png';
 
@@ -12,6 +12,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<string>('home');
   const [prefilledPackage, setPrefilledPackage] = useState<string>('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  const [useTamil, setUseTamil] = useState<boolean>(false);
 
   // Helper to prefill and redirect to contact inquiry form
   const handleSelectPackageForInquiry = (pkgName: string) => {
@@ -24,7 +25,7 @@ export default function App() {
     { id: 'home', label: 'Home', labelTamil: 'முகப்பு' },
     { id: 'services', label: 'Services', labelTamil: 'சேவைகள்' },
     { id: 'packages', label: 'Wedding Packages', labelTamil: 'திருமண திட்டங்கள்' },
-    { id: 'package-finder', label: 'Package Finder', labelTamil: 'தேர்வு மேலாளர்' },
+    { id: 'package-finder', label: 'Product Finder', labelTamil: 'தயாரிப்பு கண்டறிவி' },
     { id: 'contact', label: 'Inquiry Hub', labelTamil: 'தொடர்பு மையம்' },
   ];
 
@@ -49,10 +50,10 @@ export default function App() {
             />
             <div>
               <h1 className="font-serif text-lg sm:text-xl font-bold tracking-wider text-white uppercase flex items-center gap-1.5 leading-none">
-                Muthu Digitals
+                {useTamil ? 'முத்து டிஜிட்டல்ஸ்' : 'Muthu Digitals'}
               </h1>
               <span className="font-sans text-[10px] text-gold-400 uppercase tracking-[0.25em] font-bold block mt-1.5">
-                Photography &bull; Est. 1998
+                {useTamil ? 'புகைப்படம் \u2022 எஸ்டி. 1998' : 'Photography \u2022 Est. 1998'}
               </span>
             </div>
           </div>
@@ -71,9 +72,9 @@ export default function App() {
                   }}
                   className={`px-4 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all relative flex flex-col items-center cursor-pointer ${isActive ? 'text-gold-400' : 'text-gray-400 hover:text-white'}`}
                 >
-                  <span>{item.label}</span>
-                  <span className="text-[9px] text-gray-500 font-normal italic lowercase mt-0.5 tracking-normal">
-                    {item.labelTamil}
+                  <span>{useTamil ? item.labelTamil : item.label}</span>
+                  <span className="text-[9px] text-gray-500 font-normal italic mt-0.5 tracking-normal">
+                    {useTamil ? item.label : item.labelTamil}
                   </span>
                   {isActive && (
                     <motion.div
@@ -95,7 +96,7 @@ export default function App() {
               className="bg-gold-400/5 hover:bg-gold-400/10 border border-gold-400/30 text-gold-400 text-xs font-bold uppercase tracking-wider py-2.5 px-5 rounded-lg transition-all flex items-center gap-2 cursor-pointer"
             >
               <PhoneCall className="w-3.5 h-3.5 text-gold-400" />
-              Direct Booking: +91 98650 91095
+              {useTamil ? 'நேரடி முன்பதிவு: +91 98650 91095' : 'Direct Booking: +91 98650 91095'}
             </a>
           </div>
 
@@ -132,8 +133,12 @@ export default function App() {
                     className={`w-full text-left py-3 px-4 rounded-xl flex justify-between items-center transition-all ${isActive ? 'bg-gold-400/10 border border-gold-400/30 text-gold-400' : 'text-gray-400 hover:text-white border border-transparent'}`}
                   >
                     <div>
-                      <span className="font-sans text-xs font-bold uppercase tracking-wider block">{item.label}</span>
-                      <span className="font-sans text-[10px] text-gray-500 italic mt-0.5 block">{item.labelTamil}</span>
+                      <span className="font-sans text-xs font-bold uppercase tracking-wider block">
+                        {useTamil ? item.labelTamil : item.label}
+                      </span>
+                      <span className="font-sans text-[10px] text-gray-500 italic mt-0.5 block">
+                        {useTamil ? item.label : item.labelTamil}
+                      </span>
                     </div>
                     <ChevronRight className="w-4 h-4 text-gold-500/60" />
                   </button>
@@ -146,7 +151,7 @@ export default function App() {
                   rel="noreferrer"
                   className="w-full text-center block bg-gold-400 text-black py-4 rounded-xl font-sans text-xs font-bold uppercase tracking-wider cursor-pointer"
                 >
-                  WhatsApp: +91 98650 91095
+                  {useTamil ? 'வாட்ஸ்அப்: +91 98650 91095' : 'WhatsApp: +91 98650 91095'}
                 </a>
               </div>
             </div>
@@ -156,6 +161,24 @@ export default function App() {
 
       {/* Main Container */}
       <main className="flex-grow w-full max-w-7xl mx-auto px-6 sm:px-8 py-12 sm:py-16 md:py-20 relative z-30">
+        {activeTab !== 'home' && (
+          <div className="absolute top-4 sm:top-6 right-6 sm:right-8 z-40">
+            <div className="bg-charcoal-950/90 backdrop-blur-md border border-gold-600/30 p-1 rounded-xl flex items-center gap-1 shadow-lg shadow-gold-500/10 animate-fade-in">
+              <button
+                onClick={() => setUseTamil(false)}
+                className={`px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${!useTamil ? 'bg-gold-400 text-black shadow-md' : 'text-gray-400 hover:text-white'}`}
+              >
+                EN
+              </button>
+              <button
+                onClick={() => setUseTamil(true)}
+                className={`px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${useTamil ? 'bg-gold-400 text-black shadow-md' : 'text-gray-400 hover:text-white'}`}
+              >
+                தமிழ்
+              </button>
+            </div>
+          </div>
+        )}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
@@ -168,24 +191,28 @@ export default function App() {
               <HomeView
                 setActiveTab={setActiveTab}
                 setMatchedPackageId={setPrefilledPackage}
+                useTamil={useTamil}
+                setUseTamil={setUseTamil}
               />
             )}
             {activeTab === 'services' && (
-              <ServicesView />
+              <ServicesView useTamil={useTamil} />
             )}
             {activeTab === 'packages' && (
               <WeddingPackagesView
                 onSelectPackageForInquiry={handleSelectPackageForInquiry}
+                useTamil={useTamil}
               />
             )}
             {activeTab === 'package-finder' && (
-              <PackageFinderView
+              <ProductFinderView
                 onSelectPackageForInquiry={handleSelectPackageForInquiry}
+                useTamil={useTamil}
               />
             )}
 
             {activeTab === 'contact' && (
-              <ContactView prefilledPackage={prefilledPackage} />
+              <ContactView prefilledPackage={prefilledPackage} useTamil={useTamil} />
             )}
           </motion.div>
         </AnimatePresence>
@@ -203,18 +230,28 @@ export default function App() {
                 className="w-10 h-10 rounded-lg object-cover border border-gold-500/20"
               />
               <div>
-                <h4 className="font-serif text-lg font-bold text-white uppercase tracking-wider">Muthu Digitals</h4>
-                <p className="font-sans text-[9px] text-gold-400 uppercase tracking-widest font-semibold">Tirunelveli Legacy Studio</p>
+                <h4 className="font-serif text-lg font-bold text-white uppercase tracking-wider">
+                  {useTamil ? 'முத்து டிஜிட்டல்ஸ்' : 'Muthu Digitals'}
+                </h4>
+                <p className="font-sans text-[9px] text-gold-400 uppercase tracking-widest font-semibold">
+                  {useTamil ? 'பெரியகுளம் பாரம்பரிய ஸ்டுடியோ' : 'Periyakulam Legacy Studio'}
+                </p>
               </div>
             </div>
             <p className="font-sans text-xs text-gray-400 leading-relaxed max-w-sm">
-              We translate multi-generational celebrations and milestone events into handcrafted display art frames. Renowned for custom lighting, robust restoration processes, and premium layflat album design since 1998.
+              {useTamil ? (
+                "நாங்கள் தலைமுறைகளைக் கடந்து கொண்டாடும் சுப நிகழ்ச்சிகளை அழகிய கலைப் படைப்புகளாக மாற்றுகிறோம். 1998 முதல் பிரத்யேக விளக்கு அமைப்புகள், பழைய புகைப்பட சீரமைப்பு மற்றும் பிரீமியம் ஆல்பம் வடிவமைப்பிற்கு பெயர் பெற்றது."
+              ) : (
+                "We translate multi-generational celebrations and milestone events into handcrafted display art frames. Renowned for custom lighting, robust restoration processes, and premium layflat album design since 1998."
+              )}
             </p>
           </div>
 
           {/* Col 2: Quick Links */}
           <div className="md:col-span-3 space-y-4">
-            <h5 className="font-serif text-xs font-bold text-white uppercase tracking-widest">Digital Maps</h5>
+            <h5 className="font-serif text-xs font-bold text-white uppercase tracking-widest">
+              {useTamil ? 'டிஜிட்டல் வரைபடம்' : 'Digital Maps'}
+            </h5>
             <div className="space-y-2.5 text-xs">
               <a
                 href="https://maps.app.goo.gl/uCn9mARnHFZkC2V46"
@@ -237,7 +274,9 @@ export default function App() {
 
           {/* Col 3: Quick Tabs Map */}
           <div className="md:col-span-4 space-y-4">
-            <h5 className="font-serif text-xs font-bold text-white uppercase tracking-widest">Section Quick Rails</h5>
+            <h5 className="font-serif text-xs font-bold text-white uppercase tracking-widest">
+              {useTamil ? 'பிரிவு விரைவு இணைப்புகள்' : 'Section Quick Rails'}
+            </h5>
             <div className="grid grid-cols-2 gap-2">
               {navItems.map((n) => (
                 <button
@@ -248,7 +287,7 @@ export default function App() {
                   }}
                   className="font-sans text-xs text-gray-400 hover:text-gold-400 text-left cursor-pointer transition-colors"
                 >
-                  &bull; {n.label}
+                  &bull; {useTamil ? n.labelTamil : n.label}
                 </button>
               ))}
             </div>
@@ -257,9 +296,19 @@ export default function App() {
 
         {/* Closing copyright */}
         <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 border-t border-gray-900 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-sans text-gray-500">
-          <p>© 1998 - 2026 Muthu Digitals. All legacy reserves protected.</p>
+          <p>
+            {useTamil ? (
+              "© 1998 - 2026 முத்து டிஜிட்டல்ஸ். அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை."
+            ) : (
+              "© 1998 - 2026 Muthu Digitals. All legacy reserves protected."
+            )}
+          </p>
           <p className="flex items-center gap-1">
-            Made with <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500" /> for Legacy South Indian Weddings.
+            {useTamil ? (
+              <>தென்னிந்திய திருமணங்களுக்காக <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500" /> அன்புடன் செய்யப்பட்டது.</>
+            ) : (
+              <>Made with <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500" /> for Legacy South Indian Weddings.</>
+            )}
           </p>
         </div>
       </footer>

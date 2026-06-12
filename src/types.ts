@@ -296,3 +296,47 @@ export const PREMIUM_FRAMES_PRICES: FramePrice[] = [
   { size: '24" x 8" Frame', price: 1500 },
   { size: '30" x 10" Frame', price: 2000 }
 ];
+
+export interface AlbumPackage {
+  id: string;
+  name: string;
+  nameTamil: string;
+  baseRate: number;
+  maxPhotos: number;
+  rollCount: number;
+  extras: string;
+  extrasTamil: string;
+}
+
+export const ALBUM_PACKAGES: AlbumPackage[] = [
+  {
+    id: 'album-essential',
+    name: 'Standard 12" x 15" Album',
+    nameTamil: 'சாதாரண அளவு 12" x 15" ஆல்பம்',
+    baseRate: 7500,
+    maxPhotos: 100,
+    rollCount: 3,
+    extras: 'If more than 100 photos, extra charges apply.',
+    extrasTamil: '100 புகைப்படங்களுக்கு மேல் கூடுதல் கட்டணம் வசூலிக்கப்படும்.'
+  },
+  {
+    id: 'album-premium',
+    name: 'Premium 12" x 18" Album',
+    nameTamil: 'பிரீமியம் அளவு 12" x 18" ஆல்பம்',
+    baseRate: 10000,
+    maxPhotos: 100,
+    rollCount: 3,
+    extras: 'Includes premium layflat sheet coating & layout optimization.',
+    extrasTamil: 'உயர்தர லேஅவுட் வடிவமைப்பு மற்றும் சிறப்பு பூச்சு கொண்டது.'
+  },
+  {
+    id: 'album-elite',
+    name: 'Elite 15" x 20" Album',
+    nameTamil: 'எலைட் அளவு 15" x 20" ஆல்பம்',
+    baseRate: 15000,
+    maxPhotos: 150,
+    rollCount: 4,
+    extras: 'If extra photos, ₹3,500 per extra roll.',
+    extrasTamil: 'கூடுதல் புகைப்படங்களுக்கு ரோலுக்கு ₹3,500 கட்டணம்.'
+  }
+];

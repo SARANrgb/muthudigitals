@@ -1,52 +1,55 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { WEDDING_PACKAGES, WeddingPackage } from '../types';
 import { CheckCircle, Info, Sparkles, AlertCircle, ShoppingBag, Send } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface WeddingPackagesViewProps {
   onSelectPackageForInquiry: (pkgName: string) => void;
+  useTamil: boolean;
 }
 
-export default function WeddingPackagesView({ onSelectPackageForInquiry }: WeddingPackagesViewProps) {
-  const [useTamil, setUseTamil] = useState(false);
+export default function WeddingPackagesView({ onSelectPackageForInquiry, useTamil }: WeddingPackagesViewProps) {
 
   return (
     <div id="wedding-packages-view" className="space-y-16 sm:space-y-24">
       {/* Page Header */}
       <section className="flex flex-col sm:flex-row justify-between items-center gap-6 border-b border-gray-800 pb-8">
         <div className="space-y-2 text-center sm:text-left">
-          <span className="font-sans text-xs font-bold tracking-[0.2em] text-gold-400 uppercase">Wedding Photography & Film Assets</span>
+          <span className="font-sans text-xs font-bold tracking-[0.2em] text-gold-400 uppercase">
+            {useTamil ? 'திருமண புகைப்படம் & திரைப்பட சொத்துக்கள்' : 'Wedding Photography & Film Assets'}
+          </span>
           <h2 className="font-serif text-4xl sm:text-5xl font-black text-white gold-gradient-text leading-tight">
-            Lifetime Investment Packages
+            {useTamil ? 'ஆயுள் கால முதலீட்டு தொகுப்புகள்' : 'Lifetime Investment Packages'}
           </h2>
           <p className="font-sans text-sm text-gray-400 max-w-xl">
-            Choose from our highly specialized pre-set coverage collections. Custom adjustments are happily welcomed during our free design consultations.
+            {useTamil 
+              ? 'எங்கள் பிரத்யேக தொகுப்புகளில் இருந்து தேர்ந்தெடுக்கவும். இலவச ஆலோசனை கூட்டங்களின் போது உங்கள் தேவைக்கேற்ப மாற்றங்கள் செய்து கொள்ளலாம்.'
+              : 'Choose from our highly specialized pre-set coverage collections. Custom adjustments are happily welcomed during our free design consultations.'}
           </p>
         </div>
-
-        {/* Translation Option switch */}
-        <button 
-          onClick={() => setUseTamil(!useTamil)}
-          className="flex items-center gap-2 border border-gold-400/40 bg-gold-400/5 hover:bg-gold-400/10 hover:border-gold-300 transition-all text-gold-400 font-sans text-xs tracking-wider uppercase font-bold px-5 py-3 rounded-md cursor-pointer"
-        >
-          <Info className="w-4 h-4 text-gold-400" />
-          {useTamil ? 'Read in English' : 'தமிழ் பதிப்பில் படிக்கவும்'}
-        </button>
       </section>
 
       {/* Grid of Packages */}
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {WEDDING_PACKAGES.map((pkg) => {
           const isA_Z = pkg.id === 'premium-az';
+          const translatedBadge = isA_Z 
+            ? (useTamil ? 'பிரத்தியேக A-Z பேரனுபவம்' : 'EXCLUSIVE A-Z EXPERIENCE')
+            : (pkg.badge 
+              ? (useTamil 
+                ? (pkg.badge === 'POPULAR' ? 'பிரபலம்' : pkg.badge === 'EXCLUSIVE' ? 'பிரத்தியேக' : pkg.badge)
+                : pkg.badge)
+              : null);
+
           return (
             <div 
               key={pkg.id}
               className={`glass-card p-6 sm:p-8 rounded-2xl border transition-all duration-300 flex flex-col justify-between relative group ${pkg.isPopular ? 'border-gold-500/50 bg-gold-500/[0.03] scale-[1.01]' : 'border-gold-600/10 hover:border-gold-500/30'} ${isA_Z ? 'border-2 border-gold-400 bg-gradient-to-br from-black to-charcoal-900 shadow-2xl col-span-1 md:col-span-2 lg:col-span-1' : ''}`}
             >
               {/* Badge */}
-              {(pkg.badge || isA_Z) && (
+              {translatedBadge && (
                 <span className={`absolute -top-3 left-1/2 -translate-x-1/2 rounded-full px-3 py-1 font-sans text-[10px] font-black tracking-widest uppercase ${isA_Z ? 'bg-gold-400 text-black' : 'bg-gold-500 text-black'}`}>
-                  {isA_Z ? 'EXCLUSIVE A-Z EXPERIENCE' : pkg.badge}
+                  {translatedBadge}
                 </span>
               )}
 
@@ -61,7 +64,9 @@ export default function WeddingPackagesView({ onSelectPackageForInquiry }: Weddi
                     <span className="font-serif text-3xl font-black text-white gold-gradient-text">
                       ₹{pkg.price.toLocaleString('en-IN')}
                     </span>
-                    <span className="font-sans text-xs text-gray-500">Premium Rate</span>
+                    <span className="font-sans text-xs text-gray-500">
+                      {useTamil ? 'பிரீமியம் கட்டணம்' : 'Premium Rate'}
+                    </span>
                   </div>
                 </div>
 
@@ -74,8 +79,8 @@ export default function WeddingPackagesView({ onSelectPackageForInquiry }: Weddi
 
                 {/* List features based on language toggle */}
                 <ul className="space-y-3 pt-2">
-                  {(useTamil && pkg.featuresTamil ? pkg.featuresTamil : pkg.features).map((feat, fIdx) => {
-                    const isExcluding = feat.toLowerCase().includes('note:');
+                  {((useTamil && pkg.featuresTamil) ? pkg.featuresTamil : pkg.features).map((feat, fIdx) => {
+                    const isExcluding = feat.toLowerCase().includes('note:') || feat.includes('குறிப்பு:');
                     return (
                       <li key={fIdx} className="flex items-start gap-2.5 text-sm">
                         {isExcluding ? (
@@ -101,7 +106,7 @@ export default function WeddingPackagesView({ onSelectPackageForInquiry }: Weddi
                   rel="noreferrer"
                   className="w-full text-center block font-sans text-xs font-bold uppercase tracking-wider py-4 rounded-xl border border-gold-400/30 text-gold-400 hover:bg-gold-400/10 hover:border-gold-300 transition-all cursor-pointer"
                 >
-                  Book Instant via WhatsApp
+                  {useTamil ? 'வாட்ஸ்அப் மூலம் உடனடியாக பதிவு செய்க' : 'Book Instant via WhatsApp'}
                 </a>
 
                 {/* Local Inquiry Booking redirect */}
@@ -110,7 +115,7 @@ export default function WeddingPackagesView({ onSelectPackageForInquiry }: Weddi
                   className="w-full flex items-center justify-center gap-2 font-sans text-xs font-bold tracking-widest uppercase py-4 rounded-xl bg-gold-400 text-black hover:bg-gold-300 transition-all active:scale-98 cursor-pointer"
                 >
                   <Send className="w-3.5 h-3.5" />
-                  Request Booking Inquiry
+                  {useTamil ? 'முன்பதிவு விசாரணை கோரிக்கை' : 'Request Booking Inquiry'}
                 </button>
               </div>
             </div>
@@ -121,16 +126,20 @@ export default function WeddingPackagesView({ onSelectPackageForInquiry }: Weddi
       {/* Trust reassurance banner */}
       <section className="glass-card p-8 rounded-3xl flex flex-col md:flex-row gap-6 items-center justify-between border border-gold-500/15">
         <div className="space-y-1">
-          <h4 className="font-serif text-xl font-bold text-white uppercase tracking-tight">Need a completely Custom Package?</h4>
+          <h4 className="font-serif text-xl font-bold text-white uppercase tracking-tight">
+            {useTamil ? 'தனிப்பயன் தொகுப்பு வேண்டுமா?' : 'Need a completely Custom Package?'}
+          </h4>
           <p className="font-sans text-xs text-gray-400">
-            Tell us about your event duration, venue, and design details. We happily accommodate bespoke parameters.
+            {useTamil 
+              ? 'உங்கள் நிகழ்வின் காலம், இடம் மற்றும் வடிவமைப்பு விவரங்களை எங்களிடம் கூறுங்கள். உங்களது தேவைக்கேற்ப தனிப்பயனாக்குவோம்.'
+              : 'Tell us about your event duration, venue, and design details. We happily accommodate bespoke parameters.'}
           </p>
         </div>
         <button 
           onClick={() => onSelectPackageForInquiry('Custom Bespoke Request')}
           className="gold-gradient-bg text-black hover:bg-gold-500 font-sans text-xs font-bold tracking-widest uppercase py-4 px-8 rounded-xl shrink-0 cursor-pointer"
         >
-          Customize My Plan
+          {useTamil ? 'எனது திட்டத்தை தனிப்பயனாக்கு' : 'Customize My Plan'}
         </button>
       </section>
     </div>
