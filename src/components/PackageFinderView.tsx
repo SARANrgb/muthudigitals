@@ -193,7 +193,7 @@ export default function PackageFinderView({ onSelectPackageForInquiry }: Package
                       {/* Redirect actions */}
                       <div className="pt-4 flex flex-col sm:flex-row gap-3">
                         <a 
-                          href={`https://wa.me/919994982633?text=Hi%20Muthu%20Digitals,%20I%20used%20your%20Package%20Finder%20for%20a%20${eventType}%20with%20budget%20limit%20₹${sliderVal},%20and%20got%20matched%20with%20${rec.name}.%20Please%20verify%20my%20slot!`}
+                          href={`https://wa.me/919865091095?text=Hi%20Muthu%20Digitals,%20I%20used%20your%20Package%20Finder%20for%20a%20${eventType}%20with%20budget%20limit%20₹${sliderVal},%20and%20got%20matched%20with%20${rec.name}.%20Please%20verify%20my%20slot!`}
                           target="_blank"
                           rel="noreferrer"
                           className="flex-1 text-center font-sans text-xs font-bold uppercase tracking-widest py-3 border border-gold-400/20 text-gold-400 bg-gold-400/5 rounded-lg hover:bg-gold-400/10 transition-all cursor-pointer"

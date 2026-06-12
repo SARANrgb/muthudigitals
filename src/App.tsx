@@ -5,8 +5,8 @@ import HomeView from './components/HomeView';
 import ServicesView from './components/ServicesView';
 import WeddingPackagesView from './components/WeddingPackagesView';
 import PackageFinderView from './components/PackageFinderView';
-import AboutView from './components/AboutView';
 import ContactView from './components/ContactView';
+import logoImage from '@/assets/logo.png';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('home');
@@ -25,7 +25,6 @@ export default function App() {
     { id: 'services', label: 'Services', labelTamil: 'சேவைகள்' },
     { id: 'packages', label: 'Wedding Packages', labelTamil: 'திருமண திட்டங்கள்' },
     { id: 'package-finder', label: 'Package Finder', labelTamil: 'தேர்வு மேலாளர்' },
-    { id: 'about', label: 'About History', labelTamil: 'எங்கள் வரலாறு' },
     { id: 'contact', label: 'Inquiry Hub', labelTamil: 'தொடர்பு மையம்' },
   ];
 
@@ -39,13 +38,15 @@ export default function App() {
       <header className="sticky top-0 z-50 bg-black/80 backdrop-blur-md border-b border-gold-600/10">
         <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 h-20 flex items-center justify-between">
           {/* Brand Logo */}
-          <div 
+          <div
             onClick={() => { setActiveTab('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             className="flex items-center gap-3 cursor-pointer group"
           >
-            <div className="bg-gold-500 p-2.5 rounded-xl text-black group-hover:scale-105 transition-transform duration-300">
-              <Camera className="w-6 h-6 stroke-[2]" />
-            </div>
+            <img
+              src={logoImage}
+              alt="Muthu Digitals Logo"
+              className="w-12 h-12 rounded-xl object-cover border border-gold-500/30 group-hover:scale-105 transition-transform duration-300"
+            />
             <div>
               <h1 className="font-serif text-lg sm:text-xl font-bold tracking-wider text-white uppercase flex items-center gap-1.5 leading-none">
                 Muthu Digitals
@@ -75,7 +76,7 @@ export default function App() {
                     {item.labelTamil}
                   </span>
                   {isActive && (
-                    <motion.div 
+                    <motion.div
                       layoutId="activeIndicator"
                       className="absolute bottom-[-10px] left-4 right-4 h-[2px] bg-gold-400"
                     />
@@ -87,14 +88,14 @@ export default function App() {
 
           {/* WhatsApp Direct Header Action */}
           <div className="hidden md:flex items-center gap-3">
-            <a 
-              href="https://wa.me/919994982633" 
-              target="_blank" 
+            <a
+              href="https://wa.me/919865091095"
+              target="_blank"
               rel="noreferrer"
               className="bg-gold-400/5 hover:bg-gold-400/10 border border-gold-400/30 text-gold-400 text-xs font-bold uppercase tracking-wider py-2.5 px-5 rounded-lg transition-all flex items-center gap-2 cursor-pointer"
             >
               <PhoneCall className="w-3.5 h-3.5 text-gold-400" />
-              Direct Booking: +91 99949 82633
+              Direct Booking: +91 98650 91095
             </a>
           </div>
 
@@ -111,7 +112,7 @@ export default function App() {
       {/* Mobile Slide-out Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -139,13 +140,13 @@ export default function App() {
                 );
               })}
               <div className="pt-4 border-t border-gray-900">
-                <a 
-                  href="https://wa.me/919994982633" 
-                  target="_blank" 
+                <a
+                  href="https://wa.me/919865091095"
+                  target="_blank"
                   rel="noreferrer"
                   className="w-full text-center block bg-gold-400 text-black py-4 rounded-xl font-sans text-xs font-bold uppercase tracking-wider cursor-pointer"
                 >
-                  WhatsApp: +91 99949 82633
+                  WhatsApp: +91 98650 91095
                 </a>
               </div>
             </div>
@@ -164,27 +165,25 @@ export default function App() {
             transition={{ duration: 0.35 }}
           >
             {activeTab === 'home' && (
-              <HomeView 
-                setActiveTab={setActiveTab} 
-                setMatchedPackageId={setPrefilledPackage} 
+              <HomeView
+                setActiveTab={setActiveTab}
+                setMatchedPackageId={setPrefilledPackage}
               />
             )}
             {activeTab === 'services' && (
               <ServicesView />
             )}
             {activeTab === 'packages' && (
-              <WeddingPackagesView 
-                onSelectPackageForInquiry={handleSelectPackageForInquiry} 
+              <WeddingPackagesView
+                onSelectPackageForInquiry={handleSelectPackageForInquiry}
               />
             )}
             {activeTab === 'package-finder' && (
-              <PackageFinderView 
-                onSelectPackageForInquiry={handleSelectPackageForInquiry} 
+              <PackageFinderView
+                onSelectPackageForInquiry={handleSelectPackageForInquiry}
               />
             )}
-            {activeTab === 'about' && (
-              <AboutView setActiveTab={setActiveTab} />
-            )}
+
             {activeTab === 'contact' && (
               <ContactView prefilledPackage={prefilledPackage} />
             )}
@@ -198,9 +197,11 @@ export default function App() {
           {/* Col 1: Studio summary */}
           <div className="md:col-span-5 space-y-6">
             <div className="flex items-center gap-3">
-              <div className="bg-gold-500 p-2 rounded-lg text-black">
-                <Camera className="w-5 h-5" />
-              </div>
+              <img
+                src={logoImage}
+                alt="Muthu Digitals Logo"
+                className="w-10 h-10 rounded-lg object-cover border border-gold-500/20"
+              />
               <div>
                 <h4 className="font-serif text-lg font-bold text-white uppercase tracking-wider">Muthu Digitals</h4>
                 <p className="font-sans text-[9px] text-gold-400 uppercase tracking-widest font-semibold">Tirunelveli Legacy Studio</p>
@@ -215,16 +216,21 @@ export default function App() {
           <div className="md:col-span-3 space-y-4">
             <h5 className="font-serif text-xs font-bold text-white uppercase tracking-widest">Digital Maps</h5>
             <div className="space-y-2.5 text-xs">
-              <p className="font-sans text-gray-400 leading-relaxed flex gap-2 items-start">
+              <a
+                href="https://maps.app.goo.gl/uCn9mARnHFZkC2V46"
+                target="_blank"
+                rel="noreferrer"
+                className="font-sans text-gray-400 hover:text-gold-400 leading-relaxed flex gap-2 items-start transition-colors cursor-pointer"
+              >
                 <MapPin className="w-4 h-4 text-gold-500 shrink-0 mt-0.5" />
                 <span>
-                  123 Heritage Lane, Artisan District,<br />
-                  Tirunelveli, Tamil Nadu, 627001
+                  4GCW+4QM, Thandu Palayam,<br />
+                  Thenkarai, Tamil Nadu 625601
                 </span>
-              </p>
+              </a>
               <p className="font-sans text-gray-400 flex gap-2 items-center">
                 <Phone className="w-4 h-4 text-gold-500 shrink-0" />
-                <span>+91 99949 82633</span>
+                <span>+91 98650 91095</span>
               </p>
             </div>
           </div>
@@ -251,7 +257,7 @@ export default function App() {
 
         {/* Closing copyright */}
         <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 border-t border-gray-900 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-sans text-gray-500">
-          <p>© 1998 - 2026 Muthu Digitals & Muthu Photography. All legacy reserves protected.</p>
+          <p>© 1998 - 2026 Muthu Digitals. All legacy reserves protected.</p>
           <p className="flex items-center gap-1">
             Made with <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500" /> for Legacy South Indian Weddings.
           </p>

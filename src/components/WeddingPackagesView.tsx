@@ -96,7 +96,7 @@ export default function WeddingPackagesView({ onSelectPackageForInquiry }: Weddi
               <div className="space-y-3 pt-8 mt-auto">
                 {/* WhatsApp Action */}
                 <a 
-                  href={`https://wa.me/919994982633?text=${encodeURIComponent(pkg.whatsappMessage)}`}
+                  href={`https://wa.me/919865091095?text=${encodeURIComponent(pkg.whatsappMessage)}`}
                   target="_blank" 
                   rel="noreferrer"
                   className="w-full text-center block font-sans text-xs font-bold uppercase tracking-wider py-4 rounded-xl border border-gold-400/30 text-gold-400 hover:bg-gold-400/10 hover:border-gold-300 transition-all cursor-pointer"

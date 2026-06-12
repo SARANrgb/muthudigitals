@@ -72,8 +72,8 @@ export default function HomeView({ setActiveTab, setMatchedPackageId }: HomeView
       <section className="relative h-[90vh] w-full flex items-end pb-12 sm:pb-24 overflow-hidden rounded-3xl group border border-gold-600/10">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10" />
-          <img 
-            alt="Muthu Digitals Wedding Portrait" 
+          <img
+            alt="Muthu Digitals Wedding Portrait"
             referrerPolicy="no-referrer"
             className="w-full h-full object-cover transform scale-105 group-hover:scale-100 transition-transform duration-1000"
             src="https://lh3.googleusercontent.com/aida/AP1WRLtFgZ7-_QMSa1u8uZ-3oIL9hh_TGu0_jkJ8vzCPRntpvEsvC1ifsWNj5PA2Cdc1txajMW-IETHMu3DmHPg8Ew5k428s-QlPG3YU0QctgVAl4tuRdU3XgMymv3uityBdeZOTmUS4TnTFMmOpJCV_N2Ls31RXmLfEJgDznf7awbco6gBooVxJu87xwN_fxNtwv5Pq7caF9xEO5lIXZec_smtLBkHIdn06UmcviBh9f7Zi8Ldo-KAh2ZqCWo0"
@@ -81,7 +81,7 @@ export default function HomeView({ setActiveTab, setMatchedPackageId }: HomeView
         </div>
 
         <div className="relative z-20 px-6 sm:px-12 w-full max-w-4xl space-y-6">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -92,10 +92,10 @@ export default function HomeView({ setActiveTab, setMatchedPackageId }: HomeView
             </span>
             <div className="space-y-2">
               <h2 className="font-serif text-4xl sm:text-6xl font-bold tracking-tight text-white leading-tight">
-                Muthu Photography
+                Muthu Digitals
               </h2>
               <h3 className="font-serif text-2xl sm:text-3xl text-gold-400 font-semibold italic opacity-90">
-                முத்து போட்டோகிராபி
+                முத்து டிஜிட்டல்ஸ்
               </h3>
             </div>
             <p className="font-sans text-sm sm:text-base text-gray-300 max-w-md leading-relaxed">
@@ -103,14 +103,14 @@ export default function HomeView({ setActiveTab, setMatchedPackageId }: HomeView
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <button 
+              <button
                 onClick={() => setActiveTab('packages')}
                 className="gold-gradient-bg text-black hover:bg-gold-300 transition-all font-sans text-xs tracking-wider uppercase font-bold py-4 px-8 rounded flex items-center justify-center gap-2 cursor-pointer"
               >
                 Find Your Package
                 <ChevronRight className="w-4 h-4" />
               </button>
-              <button 
+              <button
                 onClick={() => setActiveTab('package-finder')}
                 className="bg-transparent border border-gold-400/60 hover:bg-gold-400/10 hover:border-gold-300 transition-all text-gold-400 font-sans text-xs tracking-wider uppercase font-bold py-4 px-8 rounded flex items-center justify-center gap-2 cursor-pointer"
               >
@@ -124,7 +124,7 @@ export default function HomeView({ setActiveTab, setMatchedPackageId }: HomeView
 
       {/* Statistics Bento Widget */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -142,7 +142,7 @@ export default function HomeView({ setActiveTab, setMatchedPackageId }: HomeView
           </div>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -161,7 +161,7 @@ export default function HomeView({ setActiveTab, setMatchedPackageId }: HomeView
           </div>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -188,7 +188,7 @@ export default function HomeView({ setActiveTab, setMatchedPackageId }: HomeView
             <span className="font-sans text-xs font-bold tracking-[0.2em] text-gold-400 uppercase">Aesthetic Masterclass</span>
             <h2 className="font-serif text-3xl font-bold text-white mt-1">Cinematic Showcase</h2>
           </div>
-          <button 
+          <button
             onClick={() => setActiveTab('services')}
             className="text-gold-400 font-sans text-xs font-bold tracking-wider uppercase hover:text-gold-300 flex items-center gap-1 mt-4 sm:mt-0 cursor-pointer"
           >
@@ -199,7 +199,7 @@ export default function HomeView({ setActiveTab, setMatchedPackageId }: HomeView
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {showcaseImages.map((image, idx) => (
-            <motion.div 
+            <motion.div
               key={idx}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -209,10 +209,10 @@ export default function HomeView({ setActiveTab, setMatchedPackageId }: HomeView
             >
               <div className="relative aspect-[3/2] overflow-hidden">
                 <div className="absolute inset-0 bg-black/40 z-10 group-hover:bg-black/10 transition-colors duration-500" />
-                <img 
+                <img
                   alt={image.title}
                   referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   src={image.src}
                 />
               </div>
@@ -240,7 +240,7 @@ export default function HomeView({ setActiveTab, setMatchedPackageId }: HomeView
             Following a signature "Aureate Noir" styling: rich dark settings matching majestic golden spotlights to ensure our photographs stand out as professional museum prints.
           </p>
         </div>
-        <button 
+        <button
           onClick={() => setActiveTab('contact')}
           className="gold-gradient-bg text-black hover:bg-gold-400 transition-all font-sans text-xs font-bold tracking-widest uppercase py-4 px-8 rounded-xl shrink-0 cursor-pointer"
         >

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BookingInquiry } from '../types';
-import { Phone, Mail, MapPin, Clock, Calendar, CheckSquare, Trash2, Send, CheckCircle2, ShieldCheck, Database, FileText } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Calendar, CheckSquare, Send, CheckCircle2, ShieldCheck, FileText } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import mapImage from '@/assets/google_map_location.png';
 
 interface ContactViewProps {
   prefilledPackage: string;
@@ -121,7 +122,7 @@ export default function ContactView({ prefilledPackage }: ContactViewProps) {
     <div id="contact-view" className="space-y-16 sm:space-y-24">
       {/* Intros Header */}
       <section className="text-center max-w-2xl mx-auto space-y-4">
-        <span className="font-sans text-xs font-bold tracking-[0.2em] text-gold-400 uppercase">Connect with Muthu Photography</span>
+        <span className="font-sans text-xs font-bold tracking-[0.2em] text-gold-400 uppercase">Connect with Muthu Digitals</span>
         <h2 className="font-serif text-4xl sm:text-5xl font-black text-white gold-gradient-text leading-tight">
           Inquiry & Booking Hub
         </h2>
@@ -141,7 +142,7 @@ export default function ContactView({ prefilledPackage }: ContactViewProps) {
 
           <AnimatePresence>
             {showStatusSuccess && (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
@@ -164,7 +165,7 @@ export default function ContactView({ prefilledPackage }: ContactViewProps) {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
                 <label className="font-sans text-xs font-bold text-gold-400 uppercase tracking-widest block">Full Name <span className="text-red-500">*</span></label>
-                <input 
+                <input
                   type="text"
                   required
                   placeholder="e.g. Anand Srinivasan"
@@ -176,10 +177,10 @@ export default function ContactView({ prefilledPackage }: ContactViewProps) {
 
               <div className="space-y-1.5">
                 <label className="font-sans text-xs font-bold text-gold-400 uppercase tracking-widest block">Phone Number <span className="text-red-500">*</span></label>
-                <input 
+                <input
                   type="tel"
                   required
-                  placeholder="e.g. +91 99949 82633"
+                  placeholder="e.g. +91 98650 91095"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   className="w-full bg-charcoal-950 border border-gray-800 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-gold-500 placeholder-gray-600"
@@ -190,7 +191,7 @@ export default function ContactView({ prefilledPackage }: ContactViewProps) {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
                 <label className="font-sans text-xs font-bold text-gold-400 uppercase tracking-widest block">Email Address</label>
-                <input 
+                <input
                   type="email"
                   placeholder="e.g. anand@outlook.com"
                   value={email}
@@ -201,7 +202,7 @@ export default function ContactView({ prefilledPackage }: ContactViewProps) {
 
               <div className="space-y-1.5">
                 <label className="font-sans text-xs font-bold text-gold-400 uppercase tracking-widest block">Event / Shoot Date</label>
-                <input 
+                <input
                   type="date"
                   value={eventDate}
                   onChange={(e) => setEventDate(e.target.value)}
@@ -212,7 +213,7 @@ export default function ContactView({ prefilledPackage }: ContactViewProps) {
 
             <div className="space-y-1.5">
               <label className="font-sans text-xs font-bold text-gold-400 uppercase tracking-widest block">Required Package / Service</label>
-              <select 
+              <select
                 value={serviceType}
                 onChange={(e) => setServiceType(e.target.value)}
                 className="w-full bg-charcoal-950 border border-gray-800 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-gold-500"
@@ -238,7 +239,7 @@ export default function ContactView({ prefilledPackage }: ContactViewProps) {
 
             <div className="space-y-1.5">
               <label className="font-sans text-xs font-bold text-gold-400 uppercase tracking-widest block">Custom Queries or Location Notes</label>
-              <textarea 
+              <textarea
                 rows={4}
                 placeholder="Give us details about custom stage setups, desired drone minutes, or restore counts..."
                 value={customMsg}
@@ -262,7 +263,7 @@ export default function ContactView({ prefilledPackage }: ContactViewProps) {
           {/* Coordinates */}
           <div className="glass-card p-6 sm:p-8 rounded-3xl border border-gold-600/10 space-y-6">
             <h3 className="font-serif text-xl font-bold text-white">Contact Coordinates</h3>
-            
+
             <div className="space-y-4">
               <div className="flex gap-4 items-start">
                 <div className="bg-gold-500/10 p-2.5 rounded-xl text-gold-400 mt-0.5">
@@ -270,10 +271,15 @@ export default function ContactView({ prefilledPackage }: ContactViewProps) {
                 </div>
                 <div>
                   <h4 className="font-sans text-xs font-bold text-gray-400 uppercase">Main Studio Address</h4>
-                  <p className="font-sans text-sm text-white mt-1 leading-relaxed">
-                    123 Heritage Lane, Artisan District,<br />
-                    Tirunelveli, Tamil Nadu, India.
-                  </p>
+                  <a
+                    href="https://maps.app.goo.gl/uCn9mARnHFZkC2V46"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-sans text-sm text-white mt-1 leading-relaxed hover:text-gold-400 transition-colors block"
+                  >
+                    4GCW+4QM, Thandu Palayam,<br />
+                    Thenkarai, Tamil Nadu 625601.
+                  </a>
                 </div>
               </div>
 
@@ -282,12 +288,9 @@ export default function ContactView({ prefilledPackage }: ContactViewProps) {
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="font-sans text-xs font-bold text-gray-400 uppercase">Direct Booking Hotlines</h4>
+                  <h4 className="font-sans text-xs font-bold text-gray-400 uppercase">Direct Booking Hotline</h4>
                   <p className="font-sans text-sm text-white mt-1 font-semibold">
-                    +91 99949 82633 <span className="text-[10px] text-gold-400 font-normal italic">(Senior Representative)</span>
-                  </p>
-                  <p className="font-sans text-sm text-white mt-0.5 font-semibold">
-                    +91 99949 82634 <span className="text-[10px] text-gray-500 font-normal italic">(Staff Inquiries)</span>
+                    +91 98650 91095 <span className="text-[10px] text-gold-400 font-normal italic">(Senior Representative)</span>
                   </p>
                 </div>
               </div>
@@ -297,11 +300,36 @@ export default function ContactView({ prefilledPackage }: ContactViewProps) {
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="font-sans text-xs font-bold text-gray-400 uppercase">Electronic Mailbox</h4>
-                  <p className="font-sans text-sm text-white mt-1">
-                    booking@muthudigitals.com
-                  </p>
+                  <h4 className="font-sans text-xs font-bold text-gray-400 uppercase">Gmail Address</h4>
+                  <a
+                    href="mailto:muthustudiospkm1998@gmail.com"
+                    className="font-sans text-sm text-white mt-1 hover:text-gold-400 transition-colors block"
+                  >
+                    muthustudiospkm1998@gmail.com
+                  </a>
                 </div>
+              </div>
+
+              {/* Styled Google Maps Interactive Image Link */}
+              <div className="pt-4 border-t border-gray-800/60">
+                <a
+                  href="https://maps.app.goo.gl/uCn9mARnHFZkC2V46"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block group relative overflow-hidden rounded-2xl border border-gold-600/15 hover:border-gold-500/40 transition-all duration-300"
+                >
+                  <img
+                    src={mapImage}
+                    alt="Muthu Digitals Google Maps Location"
+                    className="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-black/60 group-hover:bg-black/45 transition-all duration-300 flex items-center justify-center">
+                    <span className="bg-gold-400 text-black text-xs font-bold uppercase tracking-wider py-2.5 px-4 rounded-xl flex items-center gap-1.5 transform translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg shadow-gold-500/20">
+                      <MapPin className="w-3.5 h-3.5" />
+                      Open Google Maps
+                    </span>
+                  </div>
+                </a>
               </div>
             </div>
           </div>
@@ -331,74 +359,6 @@ export default function ContactView({ prefilledPackage }: ContactViewProps) {
         </div>
       </section>
 
-      {/* Database client registry view! */}
-      <section className="space-y-6">
-        <div className="flex items-center justify-between border-b border-gray-800 pb-4">
-          <div className="flex items-center gap-2">
-            <Database className="w-5 h-5 text-gold-400" />
-            <h3 className="font-serif text-2xl font-bold text-white">Registered Bookings & Submissions Bank</h3>
-          </div>
-          <span className="font-sans text-xs font-bold text-gray-400 uppercase tracking-widest bg-gray-950 py-1 px-3 border border-gray-800 rounded">
-            LocalStorage Sync
-          </span>
-        </div>
-
-        <p className="font-sans text-xs text-gray-400 leading-relaxed max-w-2xl">
-          The table below demonstrates the interactive capabilities of this website. Each inquiry submitted above is stored in your web browser's LocalStorage database, allowing full control to evaluate slot schedules.
-        </p>
-
-        <div className="overflow-x-auto rounded-xl border border-gray-800 bg-charcoal-950/40">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="border-b border-gray-800 font-sans text-xs font-bold tracking-wider text-gold-400 uppercase bg-charcoal-950">
-                <th className="p-4">Customer Details</th>
-                <th className="p-4">Requested Service</th>
-                <th className="p-4">Proposed Date</th>
-                <th className="p-4">Status</th>
-                <th className="p-4 text-center">Interactivity</th>
-              </tr>
-            </thead>
-            <tbody>
-              {inquiries.length > 0 ? (
-                inquiries.map((inq) => (
-                  <tr key={inq.id} className="border-b border-gray-900 font-sans text-xs text-gray-300 hover:bg-gray-800/10 transition-colors">
-                    <td className="p-4">
-                      <div className="font-semibold text-white text-sm">{inq.name}</div>
-                      <div className="text-gray-500 text-xs mt-0.5">{inq.phone} | {inq.email}</div>
-                      <div className="text-gray-400 italic text-[11px] mt-1 max-w-md line-clamp-1">"{inq.message}"</div>
-                    </td>
-                    <td className="p-4 font-medium text-gold-300">{inq.serviceType}</td>
-                    <td className="p-4 font-mono font-bold">{inq.date}</td>
-                    <td className="p-4">
-                      <span 
-                        onClick={() => handleUpdateStatus(inq.id)}
-                        className={`inline-block rounded px-2.5 py-0.5 uppercase tracking-wider text-[9px] font-black cursor-pointer select-none transition-transform active:scale-95 ${inq.status === 'Confirmed' ? 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20' : inq.status === 'Completed' ? 'bg-green-500/10 text-green-400 border border-green-500/20' : 'bg-yellow-500/10 text-yellow-500 border border-yellow-500/20'}`}
-                      >
-                        {inq.status} (Toggle)
-                      </span>
-                    </td>
-                    <td className="p-4 text-center">
-                      <button 
-                        onClick={() => handleDeleteInquiry(inq.id)}
-                        className="bg-red-500/10 border border-red-500/20 p-2 rounded-lg text-red-500 hover:bg-red-500 hover:text-white transition-all cursor-pointer"
-                        title="Delete record"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan={5} className="text-center py-8 text-gray-500 font-sans italic">
-                    No submitted inquiries currently in the LocalStorage database. Ready to receive entries above.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-      </section>
     </div>
   );
 }

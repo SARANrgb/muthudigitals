@@ -274,7 +274,7 @@ export default function ServicesView() {
               </p>
             </div>
             <a 
-              href={`https://wa.me/919994982633?text=Hi%20Muthu%20Digitals,%20I%20used%20your%20Service%20Frame%20Estimator%20and%20want%20to%20order%20${frameQty}x%20${isCustomEstimation ? `Custom%20Frame%20${customWidth}x${customHeight}%22` : selectedFrameObj?.size}%20(${customTexture}).%20The%20estimated%20cost%20is%20₹${totalPrice}.%20Please%20confirm.`}
+              href={`https://wa.me/919865091095?text=Hi%20Muthu%20Digitals,%20I%20used%20your%20Service%20Frame%20Estimator%20and%20want%20to%20order%20${frameQty}x%20${isCustomEstimation ? `Custom%20Frame%20${customWidth}x${customHeight}%22` : selectedFrameObj?.size}%20(${customTexture}).%20The%20estimated%20cost%20is%20₹${totalPrice}.%20Please%20confirm.`}
               target="_blank"
               rel="noreferrer"
               className="gold-gradient-bg hover:opacity-90 text-black py-3 px-6 rounded-lg font-sans text-xs font-bold uppercase tracking-widest cursor-pointer inline-flex items-center gap-1"
