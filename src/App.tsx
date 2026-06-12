@@ -6,7 +6,7 @@ import ServicesView from './components/ServicesView';
 import WeddingPackagesView from './components/WeddingPackagesView';
 import ProductFinderView from './components/ProductFinderView';
 import ContactView from './components/ContactView';
-import logoImage from '@/assets/logo.png';
+import logoImage from '@/assets/logo.jpg';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('home');
