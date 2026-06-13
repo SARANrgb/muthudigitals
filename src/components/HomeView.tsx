@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Camera, Calendar, Award, Scissors, Users, Sliders, ChevronRight, MessageSquare, PhoneCall } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import heroImage from '@/assets/hero_wedding.jpg';
 
 interface HomeViewProps {
   setActiveTab: (tab: string) => void;
@@ -80,7 +81,7 @@ export default function HomeView({ setActiveTab, setMatchedPackageId, useTamil, 
             alt="Muthu Digitals Wedding Portrait"
             referrerPolicy="no-referrer"
             className="w-full h-full object-cover transform scale-105 group-hover:scale-100 transition-transform duration-1000"
-            src="https://lh3.googleusercontent.com/aida/AP1WRLtFgZ7-_QMSa1u8uZ-3oIL9hh_TGu0_jkJ8vzCPRntpvEsvC1ifsWNj5PA2Cdc1txajMW-IETHMu3DmHPg8Ew5k428s-QlPG3YU0QctgVAl4tuRdU3XgMymv3uityBdeZOTmUS4TnTFMmOpJCV_N2Ls31RXmLfEJgDznf7awbco6gBooVxJu87xwN_fxNtwv5Pq7caF9xEO5lIXZec_smtLBkHIdn06UmcviBh9f7Zi8Ldo-KAh2ZqCWo0"
+            src={heroImage}
           />
         </div>
 
